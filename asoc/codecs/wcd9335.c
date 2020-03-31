@@ -14439,8 +14439,9 @@ static int tasha_probe(struct platform_device *pdev)
 	/* Register for Clock */
 	wcd_ext_clk = clk_get(tasha->wcd9xxx->dev, "wcd_clk");
 	if (IS_ERR(wcd_ext_clk)) {
-		dev_err(tasha->wcd9xxx->dev, "%s: clk get %s failed\n",
-			__func__, "wcd_ext_clk");
+		ret = PTR_ERR(wcd_ext_clk);
+		dev_err(tasha->wcd9xxx->dev, "%s: clk get %s failed %d\n",
+			__func__, "wcd_ext_clk", ret);
 		goto err_clk;
 	}
 	tasha->wcd_ext_clk = wcd_ext_clk;
