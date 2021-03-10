@@ -66,12 +66,12 @@ static const char *state_to_str(u8 state, char *buf, size_t buflen)
 	for (i = 0; i < ARRAY_SIZE(states); i++) {
 		if (!(state & (1 << i)))
 			continue;
-		cnt = snprintf(buf, buflen - cnt - 1, "%s%s%s", buf,
+		cnt = snprintf(buf + cnt, buflen - cnt - 1, "%s%s",
 			       buf[0] == '\0' ? "[" : "|",
 			       states[i]);
 	}
 	if (cnt > 0)
-		strlcat(buf + cnt, "]", buflen);
+		strlcat(buf + cnt, "]", buflen - cnt);
 
 done:
 	if (buf[0] == '\0')
